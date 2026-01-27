@@ -1,0 +1,26 @@
+/* FOOTER: professional, taller layout */
+footer {
+  background: #0f1720; /* deep neutral */
+  color: #fff;
+  padding: 1.25rem 0; /* taller spacing */
+  position: relative;
+  z-index: 5;
+  margin-top: 1.5rem; /* breathing room between contact box and footer */
+  border-top: 1px solid rgba(255,255,255,0.04);
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.footer-copy { font-size: 0.95rem; opacity: 0.95; margin: 0; }
+
+@media(max-width:600px){
+  .footer-container { padding: 0 1rem; }
+  .footer-copy { font-size: 0.9rem; }
+}

@@ -1,0 +1,30 @@
+/* Page-specific styles (heroes, page sections) */
+.page-hero {
+  padding: 2.25rem 1.5rem;
+  text-align: center;
+  background: transparent;
+}
+
+.page-hero h2 {
+  font-size: 2rem;
+  margin-bottom: .5rem;
+  color: #eaeaea;
+}
+
+.page-hero p {
+  max-width: 900px;
+  margin: 0 auto;
+  opacity: .85;
+  color: #dcd6e9; /* muted light for readability */
+}
+
+/* Active nav link styling to match site accent */
+header nav a.active {
+  color: #C3B1E1;
+  font-weight: 700;
+}
+
+@media (max-width: 768px) {
+  .page-hero h2 { font-size: 1.6rem; }
+  .page-hero { padding: 1.5rem 1rem; }
+}

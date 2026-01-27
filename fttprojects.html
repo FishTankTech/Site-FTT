@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Projects – Fish Tank Tech</title>
+    <link href="css/header.css" rel="stylesheet">
+    <link href="css/pages.css" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #0f0f0f;
+            color: #eaeaea;
+            line-height: 1.6;
+        }
+
+        /* header styles moved to css/header.css */
+
+        .projects-container {
+            padding: 3rem 5vw;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: #151515;
+            padding: 2rem;
+            border-radius: 12px;
+            border: 1px solid #222;
+            transition: 0.2s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-4px);
+            border-color: #444;
+        }
+
+        .project-card h3 {
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+        }
+
+        .project-card p {
+            font-size: 0.95rem;
+            opacity: .85;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+        <h1>Fish Tank Tech</h1>
+        <nav>
+            <a href="#projects" class="active">Projects</a>
+            <a href="#contact">Contact</a>
+        </nav>
+</header>
+
+<section class="page-hero">
+    <h2>Current Projects</h2>
+    <p>At Fish Tank Tech, we design, build, and innovate across software, analytics, photography tech, and motorsports systems. Here are 10 of the projects currently in development.</p>
+</section>
+
+<section class="projects-container">
+
+    <div class="project-card">
+        <h3>1. DPAC Timing Engine</h3>
+        <p>
+            The Dynamic Performance Adjustment Coefficient (DPAC) engine—our experimental motorsports
+            normalizer—combines drivetrain configuration, power-to-weight potential, tire profile, and elevation compensation
+            to create fair-adjusted race standings.
+        </p>
+    </div>
+
+    <div class="project-card">
+        <h3>2. FTT Portfolio CMS</h3>
+        <p>
+            A lightweight, custom-built content system powering photography, motorsports, and corporate
+            pages—optimized for speed, low maintenance, and cross-project syncing.
+        </p>
+    </div>
+
+    <div class="project-card">
+        <h3>3. Activism Photography Booking Suite</h3>
+        <p>
+            A self-service photo session booking tool with automated availability, deposit handling,
+            contract signing, and event delivery integration.
+        </p>
+    </div>
+
+    <div class="project-card">
+        <h3>4. Activism Motorsports Driver Hub</h3>
+        <p>
+            A data-forward interface for drivers to view race results, car telemetry, DPAC-revised standings,
+            and event-specific analytics.
+        </p>
+    </div>
+
+    <div class="project-card">
+        <h3>5. FTT Fabrication Workflow Tracker</h3>
+        <p>
+            A digital management tool for fabrication projects—tracking parts, build stages, materials, and labor
+            hours with a visual progress dashboard.
+        </p>
+    </div>
+
+    <div class="project-card">
+        <h3>6. FTT Client Dashboard Framework</h3>
+        <p>
+            A reusable dashboard framework that lets clients track progress on development, media, or data
+            deliverables—with messaging, revisions, and exports.
+        </p>
+    </div>
+
+    <div class="project-card">
+        <h3>7. Fish Tank Tech API Core</h3>
+        <p>
+            A multi-service backend powering authentication, project sync, usage analytics, and internal
+            micro-services used across FTT products.
+        </p>
+    </div>
+
+    <div class="project-card">
+        <h3>8. Autonomous Timing Camera Prototype</h3>
+        <p>
+            A portable camera system for motorsports that uses visual timestamping and car motion profiles
+            to generate backup timing verification.
+        </p>
+    </div>
+
+    <div class="project-card">
+        <h3>9. FTT Asset Delivery Vault</h3>
+        <p>
+            High-capacity photo and video delivery system with expiration links, client galleries, watermark controls,
+            and download tracking.
+        </p>
+    </div>
+
+    <div class="project-card">
+        <h3>10. FTT Internal Development Toolkit</h3>
+        <p>
+            A suite of CLI and web-based tools to speed up building sites, APIs, and scripts—featuring template generators,
+            environment automation, and deployment helpers.
+        </p>
+    </div>
+
+</section>
+
+</body>
+</html>

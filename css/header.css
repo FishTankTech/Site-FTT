@@ -1,0 +1,34 @@
+/* HEADER: slightly lighter grey than background */
+header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem 2rem;
+  background: #1a1a1a; /* slightly lighter than #000 background */
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+header h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  text-align: center;
+  width: 100%;
+}
+
+nav { position: absolute; right: 2rem; }
+
+nav a { 
+  margin-left: 2rem; 
+  font-weight: 500; 
+  transition: color 0.3s; 
+}
+
+nav a:hover { color: #40B5AD	; }
+
+@media(max-width:768px){
+  nav { position: static; margin-top: 0.5rem; }
+  nav a { margin-left: 1rem; }
+}
