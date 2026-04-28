@@ -1,426 +1,988 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Fish Tank Tech (FTT)</title>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-  <link href="css/header.css" rel="stylesheet">
-  <link href="css/footer.css" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FishTankTech — Development Without Drowning</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
   <style>
+    :root {
+      --bg:        #080c10;
+      --bg2:       #0d1117;
+      --bg3:       #111820;
+      --cyan:      #00d4e8;
+      --cyan-dim:  #007a8a;
+      --cyan-glow: rgba(0, 212, 232, 0.12);
+      --cyan-glow-strong: rgba(0, 212, 232, 0.25);
+      --text:      #c8d8e0;
+      --text-dim:  #5a7080;
+      --text-muted:#3a4f5a;
+      --border:    #1a2830;
+      --border-active: #00d4e8;
+      --red:       #e8504a;
+      --green:     #4ae888;
+      --yellow:    #e8c84a;
+      --mono: 'JetBrains Mono', 'Space Mono', monospace;
+    }
 
-    /* === DARK MODE OVERRIDE FOR FTT SITE === */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-/* Base */
-body {
-  background: #000 !important;
-  color: #eee !important;
-}
+    html { scroll-behavior: smooth; }
 
-/* Headers */
-h1, h2, h3, h4 {
-  color: #40B5AD	 !important;
-}
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--mono);
+      font-size: 14px;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
 
-/* Section text */
-section p, section li {
-  color: #ccc !important;
-}
-
-/* Project cards */
-.project-card .overlay {
-  background: rgba(0,0,0,0.55) !important;
-}
-.project-card .overlay:hover {
-  background: rgba(0,0,0,0.8) !important;
-}
-.project-card .overlay h3 {
-  color: #fff !important;
-}
-.project-card .overlay p {
-  color: #ccc !important;
-}
-
-/* Links inside overlays */
-.project-card .overlay a {
-  color: #40B5AD	 !important;
-}
-.project-card .overlay a:hover {
-  color: #40B5AD	 !important;
-}
-
-/* Contact section */
-.contact-section {
-  color: #fff !important;
-}
-.contact-details p {
-  color: #ddd !important;
-}
-.contact-info p {
-  color: #ccc !important;
-}
-
-.contact-form input,
-.contact-form textarea {
-  background: #111 !important;
-  border: 1px solid #333 !important;
-  color: #eee !important;
-}
-
-.contact-form button {
-  background: #40B5AD	 !important;
-  color: #000 !important;
-}
-.contact-form button:hover {
-  background: #40B5AD	 !important;
-}
-
-.project-card .overlay a {
-  color: #40B5AD	;         /* Main purple link color */
-  text-decoration: none;
-  font-weight: 600;
-}
-
-.project-card .overlay a:hover {
-  color: #40B5AD	;         /* Purple hover */
-  text-decoration: underline;
-}
-
+    /* Scanline overlay */
     body::before {
-  content: "";
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-image: url('Mats/vector-bg.svg');
-  color: #40B5AD	;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  opacity: 0.75;      /* Adjust for subtlety */
-  z-index: -1;        /* Behind the entire site */
-  pointer-events: none;
-}
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(0,0,0,0.08) 2px,
+        rgba(0,0,0,0.08) 4px
+      );
+      pointer-events: none;
+      z-index: 9999;
+    }
 
-    /* CONTACT — FULL WIDTH, PREMIUM STYLE */
-.contact-section {
-  position: relative;
-  padding: 6rem 2rem;
-  background: url('Mats/25SOLONats-5840.JPG') center/cover no-repeat;
-  color: #fff;
-}
+    /* Noise texture */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      opacity: 0.4;
+      pointer-events: none;
+      z-index: 9998;
+    }
 
- /* Contact overlay stacking (keeps overlay behind contact content) */
- .contact-overlay {
-  position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(0,0,0,0.55);
-  z-index: 1;
- }
-
-
-.contact-container {
-  position: relative;
-  z-index: 2;
-  max-width: 1200px;
-  margin: auto;
-  display: flex;
-  gap: 4rem;
-  flex-wrap: wrap;
-}
-
-.contact-info {
-  flex: 1;
-  min-width: 300px;
-}
-
-.contact-info h2 {
-  font-size: 2.7rem;
-  margin-bottom: 1rem;
-  font-weight: 700;
-}
-
-.contact-info p {
-  font-size: 1.1rem;
-  margin-bottom: 1.5rem;
-  line-height: 1.5;
-}
-
-.contact-details p {
-  font-size: 1rem;
-  margin-bottom: 0.5rem;
-}
-
-.contact-form {
-  flex: 1;
-  min-width: 300px;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-.contact-form input,
-.contact-form textarea {
-  padding: 0.9rem;
-  border-radius: 5px;
-  border: none;
-  font-size: 1rem;
-}
-
-.contact-form button {
-  padding: 0.9rem;
-  font-size: 1.1rem;
-  background: #ffa500;
-  border: none;
-  color: #111;
-  font-weight: 700;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-#contact {
-  margin-top: 4rem;   /* Increase this number for more space */
-  margin-bottom: 2rem; /* Add space between contact area and footer */
-}
-.contact-form button:hover {
-  background: #ff8800;
-}
-
-/* MOBILE */
-@media(max-width:768px){
-  .contact-container {
-    flex-direction: column;
-  }
-  .contact-info h2 {
-    font-size: 2rem;
-  }
-}
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Roboto', sans-serif; }
-    body { background: #000; color: #eee; }
-    a { text-decoration: none; color: inherit; }
-
-
-/* FOOTER: ensure it renders above any overlays */
-/* footer styles moved to css/footer.css */
-/* header styles moved to css/header.css */
-
-    /* HERO */
-    .hero {
-      height: 80vh;
-      background: url(Mats/25SOLONats-5864.JPG) center/cover no-repeat;
-      position: relative;
+    /* ─── NAV ─────────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
       display: flex;
-      justify-content: center;
       align-items: center;
-      padding: 0 1rem;
-      text-align: center;
-      color: #fff;
-    }
-    .hero::after {
-      content: "";
-      position: absolute;
-      top:0; left:0; right:0; bottom:0;
-      background: rgba(0,0,0,0.45);
+      justify-content: space-between;
+      padding: 0 2.5rem;
+      height: 56px;
+      background: rgba(8,12,16,0.92);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
     }
 
-    /* VECTOR OVERLAY */
-    .vector-overlay {
-      position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background-image: url('https://www.transparenttextures.com/patterns/asfalt-light.png');
-      opacity: 0.25;
-      z-index: 1;
-    }
-
-    .hero-content {
-      position: relative;
-      z-index: 2;
-      max-width: 800px;
-    }
-    .hero h2 { font-size: 3rem; margin-bottom: 1rem; font-weight: 700; }
-    .hero p { font-size: 1.2rem; max-width: 700px; margin: auto; }
-
-    section {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 4rem 2rem;
-    }
-    .section-title {
-      text-align: center;
-      margin-bottom: 3rem;
-      font-size: 2.5rem;
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      text-decoration: none;
+      color: var(--cyan);
       font-weight: 700;
+      font-size: 0.9rem;
+      letter-spacing: 0.08em;
     }
 
-    /* PROJECT GRID */
-    .projects {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    .nav-brand .bracket { color: var(--text-dim); }
+
+    .nav-links {
+      display: flex;
       gap: 2rem;
+      list-style: none;
     }
-    .project-card {
-      position: relative;
-      overflow: hidden;
-      cursor: pointer;
-      border-radius: 10px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-      transition: transform 0.3s;
-    }
-    .project-card:hover { transform: scale(1.02); }
-    .project-card img {
-      width: 100%;
-      height: 250px;
-      object-fit: cover;
-      display: block;
-    }
-    .project-card .overlay {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      background: rgba(0,0,0,0.6);
-      color: #fff;
-      padding: 1rem;
-    }
-    .project-card:hover .overlay { background: rgba(0,0,0,0.8); }
-    .project-card .overlay h3 { font-size: 1.5rem; margin-bottom: 0.4rem; }
-    .project-card .overlay a { color: #40B5AD	; font-weight: 600; }
-    .project-card .overlay a:hover { color: #40B5AD	; text-decoration: underline; }
-    /* SPECIAL: CENTERED FTT CARD */
-    .ftt-card {
-      grid-column: 1 / -1;       /* full width */
-      height: 350px;
-    }
-    .ftt-card img { height: 350px; }
 
-    /* CONTACT */
-    .contact-form {
-      max-width: 600px;
-      margin: auto;
+    .nav-links a {
+      color: var(--text-dim);
+      text-decoration: none;
+      font-size: 0.78rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+      position: relative;
+    }
+
+    .nav-links a::before { content: '// '; color: var(--text-muted); }
+    .nav-links a:hover { color: var(--cyan); }
+
+    /* ─── HERO ────────────────────────────────────── */
+    #hero {
+      min-height: 100vh;
       display: flex;
       flex-direction: column;
+      justify-content: center;
+      padding: 8rem 2.5rem 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(var(--border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--border) 1px, transparent 1px);
+      background-size: 40px 40px;
+      mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%);
+      opacity: 0.4;
+    }
+
+    .hero-glow {
+      position: absolute;
+      top: 20%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, var(--cyan-glow-strong) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-content { position: relative; max-width: 860px; }
+
+    .prompt-line {
+      color: var(--text-dim);
+      font-size: 0.8rem;
+      letter-spacing: 0.05em;
+      margin-bottom: 1rem;
+      opacity: 0;
+      animation: fadeUp 0.5s ease forwards 0.2s;
+    }
+
+    .prompt-line .dollar { color: var(--cyan); margin-right: 0.5rem; }
+
+    .hero-title {
+      font-size: clamp(2.4rem, 6vw, 5rem);
+      font-weight: 700;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      color: #eaf5f8;
+      opacity: 0;
+      animation: fadeUp 0.6s ease forwards 0.4s;
+    }
+
+    .hero-title .accent { color: var(--cyan); text-shadow: 0 0 30px var(--cyan-glow-strong); }
+
+    .hero-tagline {
+      margin-top: 1.2rem;
+      font-size: 1rem;
+      color: var(--text-dim);
+      letter-spacing: 0.05em;
+      opacity: 0;
+      animation: fadeUp 0.6s ease forwards 0.6s;
+    }
+
+    .hero-tagline::before { content: '> '; color: var(--cyan-dim); }
+
+    .hero-meta {
+      margin-top: 3rem;
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+      opacity: 0;
+      animation: fadeUp 0.6s ease forwards 0.8s;
+    }
+
+    .meta-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+    }
+
+    .meta-label {
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--text-muted);
+    }
+
+    .meta-value {
+      font-size: 0.85rem;
+      color: var(--cyan);
+    }
+
+    .hero-cta {
+      margin-top: 3rem;
+      display: flex;
       gap: 1rem;
+      flex-wrap: wrap;
+      opacity: 0;
+      animation: fadeUp 0.6s ease forwards 1s;
     }
-    .contact-form input, .contact-form textarea {
-      padding: 0.75rem;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      font-size: 1rem;
-    }
-    .contact-form button {
-      padding: 0.75rem;
-      font-size: 1rem;
-      border: none;
-      background: #40B5AD	;
-      color: #000;
+
+    .btn {
+      display: inline-block;
+      padding: 0.7rem 1.6rem;
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-decoration: none;
       cursor: pointer;
-      border-radius: 5px;
+      border: none;
+      transition: all 0.2s;
+    }
+
+    .btn-primary {
+      background: var(--cyan);
+      color: var(--bg);
+      box-shadow: 0 0 20px var(--cyan-glow-strong);
+    }
+
+    .btn-primary:hover {
+      background: #33dff0;
+      box-shadow: 0 0 40px rgba(0,212,232,0.5);
+      transform: translateY(-1px);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--cyan);
+      border: 1px solid var(--cyan-dim);
+    }
+
+    .btn-ghost:hover {
+      background: var(--cyan-glow);
+      border-color: var(--cyan);
+    }
+
+    /* Cursor blink */
+    .cursor {
+      display: inline-block;
+      width: 3px;
+      height: 1em;
+      background: var(--cyan);
+      vertical-align: text-bottom;
+      margin-left: 4px;
+      animation: blink 1s step-end infinite;
+    }
+
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+    @keyframes fadeUp {
+      from { opacity:0; transform: translateY(16px); }
+      to   { opacity:1; transform: translateY(0); }
+    }
+
+    /* ─── SECTION BASE ────────────────────────────── */
+    section {
+      padding: 6rem 2.5rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-header {
+      margin-bottom: 3.5rem;
+    }
+
+    .section-tag {
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      margin-bottom: 0.5rem;
+    }
+
+    .section-tag::before { content: '// '; }
+
+    .section-title {
+      font-size: clamp(1.4rem, 3vw, 2.2rem);
+      font-weight: 700;
+      color: #eaf5f8;
+      letter-spacing: -0.01em;
+    }
+
+    .section-rule {
+      width: 60px;
+      height: 2px;
+      background: var(--cyan);
+      margin-top: 1rem;
+      box-shadow: 0 0 10px var(--cyan-glow-strong);
+    }
+
+    /* ─── SERVICES ────────────────────────────────── */
+    #services { border-top: 1px solid var(--border); }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5px;
+      background: var(--border);
+      border: 1px solid var(--border);
+    }
+
+    .service-card {
+      background: var(--bg2);
+      padding: 2.2rem;
+      position: relative;
+      overflow: hidden;
       transition: background 0.3s;
     }
-    .contact-form button:hover { background: #40B5AD	; }
 
-    @media(max-width:768px){
-      .hero h2 { font-size: 2.2rem; }
-      .hero p { font-size: 1rem; }
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 2px;
+      background: var(--cyan);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.35s ease;
     }
 
+    .service-card:hover { background: var(--bg3); }
+    .service-card:hover::before { transform: scaleX(1); }
+
+    .service-num {
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      color: var(--text-muted);
+      margin-bottom: 1.2rem;
+    }
+
+    .service-icon {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+      filter: drop-shadow(0 0 8px var(--cyan-glow-strong));
+    }
+
+    .service-name {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #eaf5f8;
+      margin-bottom: 0.7rem;
+      letter-spacing: 0.02em;
+    }
+
+    .service-desc {
+      font-size: 0.8rem;
+      color: var(--text-dim);
+      line-height: 1.8;
+    }
+
+    .service-tags {
+      margin-top: 1.5rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    .tag {
+      font-size: 0.65rem;
+      padding: 0.2rem 0.5rem;
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      letter-spacing: 0.05em;
+    }
+
+    /* ─── PORTFOLIO ───────────────────────────────── */
+    #portfolio { border-top: 1px solid var(--border); }
+
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1rem;
+    }
+
+    .portfolio-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      overflow: hidden;
+      position: relative;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+
+    .portfolio-card:hover {
+      border-color: var(--cyan-dim);
+      transform: translateY(-3px);
+    }
+
+    .portfolio-card-top {
+      height: 160px;
+      background: var(--bg3);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Generative card backgrounds */
+    .portfolio-card:nth-child(1) .portfolio-card-top {
+      background: linear-gradient(135deg, #080c10 0%, #0a1a22 100%);
+    }
+    .portfolio-card:nth-child(2) .portfolio-card-top {
+      background: linear-gradient(135deg, #080c10 0%, #0d1620 100%);
+    }
+    .portfolio-card:nth-child(3) .portfolio-card-top {
+      background: linear-gradient(135deg, #080c10 0%, #0b1218 100%);
+    }
+
+    .card-art {
+      font-size: 0.65rem;
+      color: var(--cyan-dim);
+      opacity: 0.5;
+      letter-spacing: 0.05em;
+      line-height: 1.4;
+      font-family: var(--mono);
+      text-align: center;
+      white-space: pre;
+      transition: opacity 0.3s;
+      user-select: none;
+    }
+
+    .portfolio-card:hover .card-art { opacity: 1; color: var(--cyan); }
+
+    .portfolio-card-body { padding: 1.5rem; }
+
+    .portfolio-type {
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--cyan-dim);
+      margin-bottom: 0.5rem;
+    }
+
+    .portfolio-name {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #eaf5f8;
+      margin-bottom: 0.5rem;
+    }
+
+    .portfolio-desc {
+      font-size: 0.78rem;
+      color: var(--text-dim);
+      line-height: 1.7;
+    }
+
+    .portfolio-stack {
+      margin-top: 1rem;
+      display: flex;
+      gap: 0.4rem;
+      flex-wrap: wrap;
+    }
+
+    /* ─── ABOUT ───────────────────────────────────── */
+    #about { border-top: 1px solid var(--border); }
+
+    .about-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    @media (max-width: 700px) { .about-layout { grid-template-columns: 1fr; } }
+
+    .about-terminal {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      overflow: hidden;
+    }
+
+    .terminal-bar {
+      background: var(--bg3);
+      border-bottom: 1px solid var(--border);
+      padding: 0.6rem 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .dot { width: 10px; height: 10px; border-radius: 50%; }
+    .dot-r { background: var(--red); opacity: 0.7; }
+    .dot-y { background: var(--yellow); opacity: 0.7; }
+    .dot-g { background: var(--green); opacity: 0.7; }
+
+    .terminal-title {
+      margin-left: 0.5rem;
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      letter-spacing: 0.05em;
+    }
+
+    .terminal-body {
+      padding: 1.5rem;
+      font-size: 0.78rem;
+      line-height: 2;
+    }
+
+    .t-line { display: block; }
+    .t-prompt { color: var(--cyan); margin-right: 0.4rem; }
+    .t-cmd { color: var(--text); }
+    .t-out { color: var(--text-dim); padding-left: 1rem; }
+    .t-key { color: var(--cyan-dim); }
+    .t-val { color: var(--green); }
+    .t-blank { display: block; height: 0.5rem; }
+
+    .about-text p {
+      font-size: 0.85rem;
+      color: var(--text-dim);
+      line-height: 2;
+      margin-bottom: 1.2rem;
+    }
+
+    .about-text p strong { color: var(--cyan); font-weight: 500; }
+
+    /* ─── CONTACT ─────────────────────────────────── */
+    #contact {
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .contact-wrap {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    @media (max-width: 700px) { .contact-wrap { grid-template-columns: 1fr; } }
+
+    .contact-info h3 {
+      font-size: 1rem;
+      color: #eaf5f8;
+      margin-bottom: 0.8rem;
+      font-weight: 500;
+    }
+
+    .contact-info p {
+      font-size: 0.8rem;
+      color: var(--text-dim);
+      line-height: 1.9;
+      margin-bottom: 2rem;
+    }
+
+    .contact-links { display: flex; flex-direction: column; gap: 0.7rem; }
+
+    .contact-link {
+      font-size: 0.78rem;
+      color: var(--text-dim);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      transition: color 0.2s;
+    }
+
+    .contact-link:hover { color: var(--cyan); }
+    .contact-link .icon { color: var(--cyan-dim); font-size: 0.9rem; }
+
+    .contact-form { display: flex; flex-direction: column; gap: 1rem; }
+
+    .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+
+    .form-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .form-label::before { content: '> '; color: var(--cyan-dim); }
+
+    .form-input, .form-textarea {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-family: var(--mono);
+      font-size: 0.82rem;
+      padding: 0.7rem 1rem;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      resize: vertical;
+    }
+
+    .form-input:focus, .form-textarea:focus {
+      border-color: var(--cyan-dim);
+      box-shadow: 0 0 0 1px var(--cyan-dim), inset 0 0 20px rgba(0,212,232,0.04);
+    }
+
+    .form-textarea { min-height: 120px; }
+
+    /* ─── FOOTER ──────────────────────────────────── */
+    footer {
+      padding: 2rem 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .footer-brand {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    .footer-brand span { color: var(--cyan-dim); }
+
+    .footer-note {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+    }
+
+    /* ─── SCROLLBAR ───────────────────────────────── */
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--cyan-dim); }
   </style>
 </head>
-
 <body>
 
-  <header>
-    <h1>Fish Tank Tech</h1>
-    <nav>
-      <a href="#projects">Projects</a>
-      <a href="#contact">Contact</a>
-    </nav>
-  </header>
+  <!-- NAV -->
+  <nav>
+    <a href="#hero" class="nav-brand">
+      <span class="bracket">[</span>FishTankTech<span class="bracket">]</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#portfolio">Work</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
 
-  <section class="hero">
-    <div class="vector-overlay"></div>
+  <!-- HERO -->
+  <div id="hero">
+    <div class="hero-grid"></div>
+    <div class="hero-glow"></div>
     <div class="hero-content">
-      <h2>Innovative Development. Creative Solutions.</h2>
-      <p>FTT is the in-house development hub powering Activism Photography, Activism Motorsports, the Cremean Estate projects, and emerging data-driven systems.</p>
+      <p class="prompt-line"><span class="dollar">$</span>whoami</p>
+      <h1 class="hero-title">
+        Fish<span class="accent">Tank</span>Tech<span class="cursor"></span>
+      </h1>
+      <p class="hero-tagline">Development Without Drowning</p>
+      <div class="hero-meta">
+        <div class="meta-item">
+          <span class="meta-label">Discipline</span>
+          <span class="meta-value">Software Engineering</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">Focus</span>
+          <span class="meta-value">Systems &amp; Web</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">Status</span>
+          <span class="meta-value" id="status-text">Available for work</span>
+        </div>
+      </div>
+      <div class="hero-cta">
+        <a href="#portfolio" class="btn btn-primary">View Work</a>
+        <a href="#contact" class="btn btn-ghost">Get in Touch</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- SERVICES -->
+  <section id="services">
+    <div class="section-header">
+      <p class="section-tag">What we do</p>
+      <h2 class="section-title">Services</h2>
+      <div class="section-rule"></div>
+    </div>
+    <div class="services-grid">
+
+      <div class="service-card">
+        <div class="service-num">01 ——</div>
+        <div class="service-icon">⬡</div>
+        <h3 class="service-name">Web Platforms</h3>
+        <p class="service-desc">
+          Full-stack web development built for reliability and longevity.
+          From architecture to deployment — no shortcuts, no fragile dependencies.
+        </p>
+        <div class="service-tags">
+          <span class="tag">Node.js</span>
+          <span class="tag">PostgreSQL</span>
+          <span class="tag">REST / GraphQL</span>
+          <span class="tag">Docker</span>
+        </div>
+      </div>
+
+      <div class="service-card">
+        <div class="service-num">02 ——</div>
+        <div class="service-icon">⟁</div>
+        <h3 class="service-name">Data Pipelines &amp; Automation</h3>
+        <p class="service-desc">
+          Ingest, transform, and deliver data at any scale.
+          Automated workflows that run quietly and fail loudly.
+        </p>
+        <div class="service-tags">
+          <span class="tag">Python</span>
+          <span class="tag">ETL</span>
+          <span class="tag">Scheduling</span>
+          <span class="tag">APIs</span>
+        </div>
+      </div>
+
+      <div class="service-card">
+        <div class="service-num">03 ——</div>
+        <div class="service-icon">◈</div>
+        <h3 class="service-name">Analytical Tooling</h3>
+        <p class="service-desc">
+          Custom dashboards and reporting systems that surface
+          the metrics that actually matter to your operation.
+        </p>
+        <div class="service-tags">
+          <span class="tag">Dashboards</span>
+          <span class="tag">Reporting</span>
+          <span class="tag">Visualization</span>
+          <span class="tag">SQL</span>
+        </div>
+      </div>
+
     </div>
   </section>
 
-  <section id="projects">
-    <h2 class="section-title">Our Projects</h2>
+  <!-- PORTFOLIO -->
+  <section id="portfolio">
+    <div class="section-header">
+      <p class="section-tag">Selected work</p>
+      <h2 class="section-title">Projects</h2>
+      <div class="section-rule"></div>
+    </div>
+    <div class="portfolio-grid">
 
-    <div class="projects">
-
-      <div class="project-card">
-        <img src="mats/IMG_1797.JPG" alt="Activism Motorsports">
-        <div class="overlay">
-          <h3>Activism Photography</h3>
-          <a href="#" target="_blank">Instagram</a> | 
-          <a href="#">Website</a>
+      <div class="portfolio-card">
+        <div class="portfolio-card-top">
+          <pre class="card-art">┌─ telemetry_logger ─────┐
+│  GPS  ░░░░░░░░░░  IMU  │
+│  lat: 33.7490°N        │
+│  lon: 84.3880°W        │
+│  spd: 67.4 mph  ██████ │
+└────────────────────────┘</pre>
+        </div>
+        <div class="portfolio-card-body">
+          <p class="portfolio-type">Embedded / Motorsports</p>
+          <h3 class="portfolio-name">N.O.V.A. Data Logger</h3>
+          <p class="portfolio-desc">Custom telemetry system built around Teensy 4.1 with GPS, IMU, and CAN bus integration for grassroots motorsports data capture.</p>
+          <div class="portfolio-stack">
+            <span class="tag">C++</span>
+            <span class="tag">Teensy 4.1</span>
+            <span class="tag">CAN Bus</span>
+            <span class="tag">GPS / IMU</span>
+          </div>
         </div>
       </div>
 
-      <div class="project-card">
-        <img src="mats/25SOLONats-5814.JPG" alt="Activism Motorsports">
-        <div class="overlay">
-          <h3>Activism Motorsports</h3>
-          <a href="#" target="_blank">Instagram</a> | 
-          <a href="#">Website</a>
+      <div class="portfolio-card">
+        <div class="portfolio-card-top">
+          <pre class="card-art">SELECT p.name,
+  AVG(p.time)  AS avg_lap,
+  dpac_score(p.config)
+FROM performances p
+WHERE p.event = $1
+GROUP BY p.name
+ORDER BY dpac_score DESC;</pre>
+        </div>
+        <div class="portfolio-card-body">
+          <p class="portfolio-type">Analytics / Research</p>
+          <h3 class="portfolio-name">DPAC Normalization System</h3>
+          <p class="portfolio-desc">Experimental performance normalization engine for motorsports analysis, accounting for drivetrain, tire type, elevation, and power-to-weight.</p>
+          <div class="portfolio-stack">
+            <span class="tag">Python</span>
+            <span class="tag">PostgreSQL</span>
+            <span class="tag">Analysis</span>
+          </div>
         </div>
       </div>
 
-      <div class="project-card">
-        <img src="Mats/52664232462_8cbcf65c10_b.jpg" alt="BoB – Cremean Estate">
-        <div class="overlay">
-          <h3>Bob-&-Robert: The Cremean Estate</h3>
-          <a href="#" target="_blank">Website</a>
+      <div class="portfolio-card">
+        <div class="portfolio-card-top">
+          <pre class="card-art">POST /api/v1/deploy
+──────────────────────
+✓ build   [0.8s]
+✓ test    [2.1s]
+✓ push    [1.4s]
+✓ migrate [0.3s]
+→ live at 04:32 UTC</pre>
         </div>
-      </div>
-
-      <!-- CENTERED — FULL WIDTH MAIN PROJECT -->
-      <div class="project-card ftt-card">
-        <img src="Mats/proxy-image.jpeg" alt="Fish Tank Tech">
-        <div class="overlay">
-          <h3>Fish Tank Tech – In-House Development</h3>
-          <p>Custom systems, websites, tools, and data frameworks built for all FTT-associated brands.</p>
-          <a href="fttprojects.html">Check Out The Latest Projects</a>
+        <div class="portfolio-card-body">
+          <p class="portfolio-type">Web Platform</p>
+          <h3 class="portfolio-name">FishTankTech Client Portal</h3>
+          <p class="portfolio-desc">Internal project management and deployment tooling for client project tracking, automated delivery pipelines, and reporting.</p>
+          <div class="portfolio-stack">
+            <span class="tag">Node.js</span>
+            <span class="tag">Docker</span>
+            <span class="tag">PostgreSQL</span>
+          </div>
         </div>
       </div>
 
     </div>
   </section>
-  <section id="contact" class="contact-section">
-  <div class="contact-overlay"></div>
-  
-  <div class="contact-container">
-    <div class="contact-info">
-      <h2>Get In Touch</h2>
-      <p>
-        Whether you're seeking development support, data solutions, or 
-        collaboration on a new project — Fish Tank Tech is here to help.
-      </p>
 
-      <div class="contact-details">
-        <p><strong>Email:</strong> MyFishTankTech@gmail.com</p>
-        <p><strong>Instagram:</strong> @FishTankTech</p>
-      </div>
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="section-header">
+      <p class="section-tag">Who we are</p>
+      <h2 class="section-title">About</h2>
+      <div class="section-rule"></div>
     </div>
+    <div class="about-layout">
 
-    <form class="contact-form">
-      <input type="text" name="name" placeholder="Your Name" required>
-      <input type="email" name="email" placeholder="Your Email" required>
-      <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
-      <button type="button" onclick="alert('Backend email handler not yet configured.')">Send Message</button>
-    </form>
-  </div>
-</section>  <!-- closes #contact section properly -->
+      <div class="about-terminal">
+        <div class="terminal-bar">
+          <span class="dot dot-r"></span>
+          <span class="dot dot-y"></span>
+          <span class="dot dot-g"></span>
+          <span class="terminal-title">fishtanktech — profile.sh</span>
+        </div>
+        <div class="terminal-body">
+          <span class="t-line"><span class="t-prompt">$</span><span class="t-cmd"> cat profile.json</span></span>
+          <span class="t-blank"></span>
+          <span class="t-line t-out"><span class="t-key">"name"</span>: <span class="t-val">"Fisher Armstrong"</span>,</span>
+          <span class="t-line t-out"><span class="t-key">"firm"</span>: <span class="t-val">"FishTankTech"</span>,</span>
+          <span class="t-line t-out"><span class="t-key">"focus"</span>: [</span>
+          <span class="t-line t-out">&nbsp;&nbsp;<span class="t-val">"web platforms"</span>,</span>
+          <span class="t-line t-out">&nbsp;&nbsp;<span class="t-val">"data engineering"</span>,</span>
+          <span class="t-line t-out">&nbsp;&nbsp;<span class="t-val">"analytical tooling"</span></span>
+          <span class="t-line t-out">],</span>
+          <span class="t-line t-out"><span class="t-key">"arch"</span>: <span class="t-val">"Arch Linux / KDE"</span>,</span>
+          <span class="t-line t-out"><span class="t-key">"philosophy"</span>: <span class="t-val">"understand your tools"</span>,</span>
+          <span class="t-line t-out"><span class="t-key">"status"</span>: <span class="t-val">"open to projects"</span></span>
+          <span class="t-blank"></span>
+          <span class="t-line"><span class="t-prompt">$</span><span class="cursor"></span></span>
+        </div>
+      </div>
 
-<footer>
-  <div class="footer-container">
-    <p class="footer-copy">&copy; 2025 Fish Tank Tech</p>
-  </div>
-</footer>
+      <div class="about-text">
+        <p>
+          <strong>FishTankTech</strong> is a software engineering and systems development
+          practice built on the belief that good code should be maintainable,
+          purposeful, and built to last — not patched together until the next sprint.
+        </p>
+        <p>
+          The work spans the full stack: web platforms that scale gracefully,
+          data pipelines that run reliably, and analytical tooling that surfaces
+          the signal in the noise. Every system is engineered to be understood,
+          not just operated.
+        </p>
+        <p>
+          Outside the terminal, the practice extends into embedded systems and
+          motorsports engineering under <strong>Activism Motorsports</strong> —
+          where software meets asphalt and the feedback loop is measured in seconds.
+        </p>
+        <a href="#contact" class="btn btn-ghost" style="margin-top: 1rem; display: inline-block;">Start a conversation →</a>
+      </div>
 
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="section-header">
+      <p class="section-tag">Get in touch</p>
+      <h2 class="section-title">Contact</h2>
+      <div class="section-rule"></div>
+    </div>
+    <div class="contact-wrap">
+
+      <div class="contact-info">
+        <h3>Let's build something that works.</h3>
+        <p>
+          Have a project in mind? Need a second opinion on an architecture decision?
+          Looking for a development partner who won't drown you in jargon?
+          Reach out.
+        </p>
+        <div class="contact-links">
+          <a href="mailto:MyFishTankTech@gmail.com" class="contact-link">
+            <span class="icon">⬡</span>MyFishTankTech@gmail.com
+          </a>
+          <a href="https:/github.com/silly-goose-inc" class="contact-link" target="_blank">
+            <span class="icon">⟁</span>github.com/silly-goose-inc
+          </a>
+        </div>
+      </div>
+
+      <div class="contact-form" id="contact-form">
+        <div class="form-group">
+          <label class="form-label" for="name">Name</label>
+          <input class="form-input" type="text" id="name" placeholder="Your name" autocomplete="off" />
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="email">Email</label>
+          <input class="form-input" type="email" id="email" placeholder="your@email.com" autocomplete="off" />
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="message">Message</label>
+          <textarea class="form-textarea" id="message" placeholder="Tell me about your project..."></textarea>
+        </div>
+        <button class="btn btn-primary" onclick="handleSubmit()" style="width: fit-content;">Send Message</button>
+        <p id="form-feedback" style="font-size:0.78rem; color: var(--green); display:none; margin-top: 0.5rem;">
+          ✓ Message queued. We'll be in touch.
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p class="footer-brand"><span>[</span>FishTankTech<span>]</span> — Development Without Drowning</p>
+    <p class="footer-note">© 2026 FishTankTech. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // Status cycling
+    const statuses = ['Available for work', 'Open to projects', 'Taking on clients'];
+    let si = 0;
+    setInterval(() => {
+      si = (si + 1) % statuses.length;
+      const el = document.getElementById('status-text');
+      el.style.opacity = '0';
+      setTimeout(() => { el.textContent = statuses[si]; el.style.opacity = '1'; }, 300);
+    }, 3000);
+
+    document.getElementById('status-text').style.transition = 'opacity 0.3s';
+
+    // Form handler
+    function handleSubmit() {
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const msg = document.getElementById('message').value.trim();
+      const fb = document.getElementById('form-feedback');
+      if (!name || !email || !msg) {
+        fb.textContent = '✗ Please fill out all fields.';
+        fb.style.color = 'var(--red)';
+        fb.style.display = 'block';
+        return;
+      }
+      fb.textContent = '✓ Message queued. We\'ll be in touch.';
+      fb.style.color = 'var(--green)';
+      fb.style.display = 'block';
+      document.getElementById('name').value = '';
+      document.getElementById('email').value = '';
+      document.getElementById('message').value = '';
+    }
+
+    // Intersection observer fade-in for sections
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.style.opacity = '1';
+          e.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.service-card, .portfolio-card').forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(20px)';
+      el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+      observer.observe(el);
+    });
+  </script>
 </body>
 </html>
