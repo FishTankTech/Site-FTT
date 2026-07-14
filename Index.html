@@ -471,6 +471,107 @@
       flex-wrap: wrap;
     }
 
+    /* ─── DEPLOYMENTS TEASER ──────────────────────── */
+    #deployments { border-top: 1px solid var(--border); }
+
+    .deploy-teaser {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+      flex-wrap: wrap;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      padding: 2.5rem;
+      text-decoration: none;
+      color: var(--text);
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.3s, background 0.3s;
+    }
+
+    .deploy-teaser::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 3px; height: 100%;
+      background: var(--cyan);
+      transform: scaleY(0);
+      transform-origin: top;
+      transition: transform 0.35s ease;
+    }
+
+    .deploy-teaser:hover {
+      border-color: var(--cyan-dim);
+      background: var(--bg3);
+    }
+
+    .deploy-teaser:hover::before { transform: scaleY(1); }
+
+    .deploy-teaser-left { max-width: 640px; }
+
+    .deploy-teaser-eyebrow {
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--cyan-dim);
+      margin-bottom: 0.6rem;
+    }
+
+    .deploy-teaser-eyebrow::before { content: '↳ '; }
+
+    .deploy-teaser-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #eaf5f8;
+      margin-bottom: 0.6rem;
+    }
+
+    .deploy-teaser-desc {
+      font-size: 0.82rem;
+      color: var(--text-dim);
+      line-height: 1.8;
+    }
+
+    .deploy-teaser-count {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      margin-top: 1rem;
+      letter-spacing: 0.05em;
+    }
+
+    .deploy-teaser-count .dot-flash {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 6px var(--green);
+      animation: blink 1.4s ease-in-out infinite;
+    }
+
+    .deploy-teaser-cta {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .deploy-teaser-cta .arrow {
+      transition: transform 0.25s;
+    }
+
+    .deploy-teaser:hover .deploy-teaser-cta .arrow {
+      transform: translateX(4px);
+    }
+
     /* ─── ABOUT ───────────────────────────────────── */
     #about { border-top: 1px solid var(--border); }
 
@@ -649,6 +750,7 @@
     <ul class="nav-links">
       <li><a href="#services">Services</a></li>
       <li><a href="#portfolio">Work</a></li>
+      <li><a href="#deployments">Projects</a></li>
       <li><a href="#about">About</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
@@ -823,6 +925,33 @@ ORDER BY dpac_score DESC;</pre>
     </div>
   </section>
 
+  <!-- DEPLOYMENTS -->
+  <section id="deployments">
+    <div class="section-header">
+      <p class="section-tag">Visit the projects</p>
+      <h2 class="section-title">Live &amp; Example Sites</h2>
+      <div class="section-rule"></div>
+    </div>
+
+    <a href="projects.html" class="deploy-teaser">
+      <div class="deploy-teaser-left">
+        <p class="deploy-teaser-eyebrow">Project index</p>
+        <h3 class="deploy-teaser-title">Browse every site FishTankTech has built</h3>
+        <p class="deploy-teaser-desc">
+          Live production deployments alongside example and in-progress builds,
+          in one place — pick a project to visit it directly.
+        </p>
+        <div class="deploy-teaser-count">
+          <span class="dot-flash"></span>
+          <span>4 projects indexed</span>
+        </div>
+      </div>
+      <div class="deploy-teaser-cta">
+        Visit Our Projects <span class="arrow">→</span>
+      </div>
+    </a>
+  </section>
+
   <!-- ABOUT -->
   <section id="about">
     <div class="section-header">
@@ -900,8 +1029,8 @@ ORDER BY dpac_score DESC;</pre>
           <a href="mailto:MyFishTankTech@gmail.com" class="contact-link">
             <span class="icon">⬡</span>MyFishTankTech@gmail.com
           </a>
-          <a href="https:/github.com/silly-goose-inc" class="contact-link" target="_blank">
-            <span class="icon">⟁</span>github.com/silly-goose-inc
+          <a href="https:/github.com/fishtanktech" class="contact-link" target="_blank">
+            <span class="icon">⟁</span>github.com/FishTankTech
           </a>
         </div>
       </div>

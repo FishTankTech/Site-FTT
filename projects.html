@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Projects — FishTankTech</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg:        #080c10;
+      --bg2:       #0d1117;
+      --bg3:       #111820;
+      --cyan:      #00d4e8;
+      --cyan-dim:  #007a8a;
+      --cyan-glow: rgba(0, 212, 232, 0.12);
+      --cyan-glow-strong: rgba(0, 212, 232, 0.25);
+      --text:      #c8d8e0;
+      --text-dim:  #5a7080;
+      --text-muted:#3a4f5a;
+      --border:    #1a2830;
+      --red:       #e8504a;
+      --green:     #4ae888;
+      --yellow:    #e8c84a;
+      --mono: 'JetBrains Mono', 'Space Mono', monospace;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--mono);
+      font-size: 14px;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.08) 2px, rgba(0,0,0,0.08) 4px);
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      opacity: 0.4;
+      pointer-events: none;
+      z-index: 9998;
+    }
+
+    /* ─── NAV ─────────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2.5rem;
+      height: 56px;
+      background: rgba(8,12,16,0.92);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      text-decoration: none;
+      color: var(--cyan);
+      font-weight: 700;
+      font-size: 0.9rem;
+      letter-spacing: 0.08em;
+    }
+
+    .nav-brand .bracket { color: var(--text-dim); }
+
+    .nav-back {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--text-dim);
+      text-decoration: none;
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .nav-back:hover { color: var(--cyan); }
+    .nav-back .arrow-back { transition: transform 0.2s; }
+    .nav-back:hover .arrow-back { transform: translateX(-3px); }
+
+    /* ─── HEADER ──────────────────────────────────── */
+    .page-header {
+      padding: 8rem 2.5rem 3rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .page-eyebrow {
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      margin-bottom: 0.6rem;
+    }
+
+    .page-eyebrow::before { content: '// '; }
+
+    .page-title {
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      font-weight: 700;
+      color: #eaf5f8;
+      letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+    }
+
+    .page-desc {
+      max-width: 640px;
+      font-size: 0.85rem;
+      color: var(--text-dim);
+      line-height: 1.9;
+      margin-bottom: 1.5rem;
+    }
+
+    /* ─── FILTER BAR ──────────────────────────────── */
+    .filter-bar {
+      display: flex;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+    }
+
+    .filter-btn {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-dim);
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      transition: border-color 0.2s, color 0.2s, background 0.2s;
+    }
+
+    .filter-btn:hover { border-color: var(--cyan-dim); color: var(--text); }
+
+    .filter-btn.active {
+      border-color: var(--cyan);
+      color: var(--cyan);
+      background: var(--cyan-glow);
+    }
+
+    /* ─── GRID ────────────────────────────────────── */
+    .deploy-section {
+      padding: 2rem 2.5rem 6rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .deploy-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1rem;
+    }
+
+    .deploy-card {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      padding: 1.6rem;
+      text-decoration: none;
+      color: var(--text);
+      transition: border-color 0.3s, transform 0.3s, background 0.3s, opacity 0.3s;
+      position: relative;
+    }
+
+    .deploy-card:hover {
+      border-color: var(--cyan-dim);
+      background: var(--bg3);
+      transform: translateY(-3px);
+    }
+
+    .deploy-card.hidden { display: none; }
+
+    .deploy-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+    }
+
+    .deploy-status {
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 0.2rem 0.5rem;
+      border: 1px solid;
+      white-space: nowrap;
+    }
+
+    .status-live {
+      color: var(--green);
+      border-color: var(--green);
+      text-shadow: 0 0 8px rgba(74,232,136,0.4);
+    }
+
+    .status-live::before { content: '● '; }
+
+    .status-demo {
+      color: var(--yellow);
+      border-color: var(--yellow);
+    }
+
+    .deploy-arrow {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      transition: transform 0.25s, color 0.25s;
+    }
+
+    .deploy-card:hover .deploy-arrow {
+      color: var(--cyan);
+      transform: translate(3px, -3px);
+    }
+
+    .deploy-category {
+      font-size: 0.62rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--cyan-dim);
+      margin-bottom: 0.5rem;
+    }
+
+    .deploy-name {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #eaf5f8;
+      margin-bottom: 0.5rem;
+    }
+
+    .deploy-desc {
+      font-size: 0.78rem;
+      color: var(--text-dim);
+      line-height: 1.7;
+      margin-bottom: 1.2rem;
+    }
+
+    .deploy-url {
+      font-size: 0.7rem;
+      color: var(--cyan-dim);
+      letter-spacing: 0.03em;
+      border-top: 1px solid var(--border);
+      padding-top: 0.8rem;
+    }
+
+    .deploy-url::before { content: '↳ '; }
+
+    /* ─── FOOTER ──────────────────────────────────── */
+    footer {
+      padding: 2rem 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+      max-width: 1100px;
+      margin: 0 auto;
+      border-top: 1px solid var(--border);
+    }
+
+    .footer-brand { font-size: 0.78rem; color: var(--text-muted); }
+    .footer-brand span { color: var(--cyan-dim); }
+    .footer-note { font-size: 0.7rem; color: var(--text-muted); }
+
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--cyan-dim); }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="index.html" class="nav-brand">
+      <span class="bracket">[</span>FishTankTech<span class="bracket">]</span>
+    </a>
+    <a href="index.html" class="nav-back">
+      <span class="arrow-back">←</span> Back to Home
+    </a>
+  </nav>
+
+  <!-- HEADER -->
+  <div class="page-header">
+    <p class="page-eyebrow">Project index</p>
+    <h1 class="page-title">All Projects</h1>
+    <p class="page-desc">
+      Every site FishTankTech has shipped or is building — live production
+      deployments and example builds side by side. Filter by status, then
+      pick one to visit it directly.
+    </p>
+    <div class="filter-bar">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="live">Live</button>
+      <button class="filter-btn" data-filter="demo">Demo</button>
+    </div>
+  </div>
+
+  <!-- GRID -->
+  <section class="deploy-section">
+    <div class="deploy-grid" id="deploy-grid">
+
+      <a href="https://fisherarmstrong.com" class="deploy-card" data-status="live" target="_blank" rel="noopener">
+        <div>
+          <div class="deploy-top">
+            <span class="deploy-status status-live">Live</span>
+            <span class="deploy-arrow">↗</span>
+          </div>
+          <p class="deploy-category">Personal</p>
+          <h3 class="deploy-name">Fisher Armstrong — Personal Site</h3>
+          <p class="deploy-desc">Portfolio and personal landing page — warm paper aesthetic, self-hosted.</p>
+        </div>
+        <div class="deploy-url">fisherarmstrong.com</div>
+      </a>
+
+      <a href="#" class="deploy-card" data-status="demo" target="_blank" rel="noopener">
+        <div>
+          <div class="deploy-top">
+            <span class="deploy-status status-demo">Demo</span>
+            <span class="deploy-arrow">↗</span>
+          </div>
+          <p class="deploy-category">Motorsports</p>
+          <h3 class="deploy-name">Activism Motorsports</h3>
+          <p class="deploy-desc">Grassroots autocross &amp; hillclimb competition — event coverage and series info.</p>
+        </div>
+        <div class="deploy-url">example / not yet live</div>
+      </a>
+
+      <a href="#" class="deploy-card" data-status="demo" target="_blank" rel="noopener">
+        <div>
+          <div class="deploy-top">
+            <span class="deploy-status status-demo">Demo</span>
+            <span class="deploy-arrow">↗</span>
+          </div>
+          <p class="deploy-category">Photography</p>
+          <h3 class="deploy-name">Activism Photography</h3>
+          <p class="deploy-desc">Documentary and motorsports photography — narrative-driven archive.</p>
+        </div>
+        <div class="deploy-url">example / not yet live</div>
+      </a>
+
+      <a href="#" class="deploy-card" data-status="demo" target="_blank" rel="noopener">
+        <div>
+          <div class="deploy-top">
+            <span class="deploy-status status-demo">Demo</span>
+            <span class="deploy-arrow">↗</span>
+          </div>
+          <p class="deploy-category">Service Business</p>
+          <h3 class="deploy-name">Mountain Mule Junk Removal</h3>
+          <p class="deploy-desc">Local service business site — booking flow and service breakdown.</p>
+        </div>
+        <div class="deploy-url">example / not yet live</div>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p class="footer-brand"><span>[</span>FishTankTech<span>]</span> — Development Without Drowning</p>
+    <p class="footer-note">© 2026 FishTankTech. All rights reserved.</p>
+  </footer>
+
+  <script>
+    const buttons = document.querySelectorAll('.filter-btn');
+    const cards = document.querySelectorAll('.deploy-card');
+
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        buttons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const filter = btn.dataset.filter;
+        cards.forEach(card => {
+          const show = filter === 'all' || card.dataset.status === filter;
+          card.classList.toggle('hidden', !show);
+        });
+      });
+    });
+  </script>
+</body>
+</html>
